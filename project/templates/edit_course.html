@@ -1,0 +1,102 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Edit Course
+{% endblock %}
+
+{% block main %}
+
+<div class = "form-edit">
+<form class = "sideBySideForm">
+        <p style="font-size:24px;" ><b><em> Current course details</em></b></p>
+        <div class="form-group">
+            <label class = "label-form">Course name</label>
+            <input autofocus class="form-control" type="text" value =  "{{ course_data['course_name'] }}" disabled>
+        </div>
+        <div class="form-group">
+            <label class = "label-form">Course grade</label>
+            <input autofocus class="form-control" type="text" value = "{{ course_data['course_grade'] }}"  disabled>
+        </div>
+        <div class="form-group">
+            <label class = "label-form">Course completion date</label>
+            <input autofocus class="form-control" type="text" value = "{{ course_data['course_date'] }}" disabled>
+        </div>
+        <div class="form-group">
+            <label class = "label-form">Course provider</label>
+            <input autofocus class="form-control" type="text" value = "{{ course_data['course_provider'] }}"  disabled>
+        </div>
+        <div class="form-group">
+            <label class = "label-form">Course certificate link</label>
+            <input autofocus class="form-control" type="text" value = "{{ course_data['course_certificate_link'] }}"  disabled>
+        </div>
+        <div class="form-group formfield">
+            <label class = "label-form">Course Description</label>
+            <textarea id = "course_description" class="form-control textarea_form" rows="10" cols="50" name="course_description" form="add_course_form" disabled autofocus>
+                     {{ course_data['course_description'] }}
+            </textarea>
+        </div>
+
+    </form>
+</div>
+
+<div class = "form-edit">
+    <form action = "/update" onsubmit = "return check_all_fields_are_filled();"  id = "edit_course_form" method = "post">
+        <p style="font-size:24px;" ><b><em> Updated course details</em></b></p>
+        <div class="form-group">
+            <label class = "label-form">Course name</label>
+            <input autofocus class="form-control" type="text" value =  "{{ course_data['course_name'] }}" name = "course_name" autocomplete="off">
+        </div>
+        <div class="form-group">
+            <label class = "label-form">Course grade</label>
+            <input autofocus class="form-control" type="text" value = "{{ course_data['course_grade'] }}" name = "course_grade" autocomplete="off">
+        </div>
+        <div class="form-group">
+            <label class = "label-form">Course completion date</label>
+            <input autofocus class="form-control" type="date" value = "{{ course_data['course_date'] }}" name = "course_completion_date" autocomplete="off">
+        </div>
+        <div class="form-group">
+            <label class = "label-form">Course provider</label>
+            <input autofocus class="form-control" type="text" value = "{{ course_data['course_provider'] }}" name = "course_provider" autocomplete="off">
+        </div>
+        <div class="form-group">
+            <label class = "label-form">Course certificate link</label>
+            <input autofocus class="form-control" type="url" value = "{{ course_data['course_certificate_link'] }}" name = "course_link" autocomplete="off">
+        </div>
+        <div class="form-group formfield">
+            <label class = "label-form">Course Description</label>
+            <textarea id = "course_description" class="form-control textarea_form" rows="10" cols="50" name="course_description" form="edit_course_form" autofocus autocomplete="off">
+                     {{ course_data['course_description'] }}
+            </textarea>
+        </div>
+        <button class="btn btn-primary" type="submit">Update Course</button>
+        <!-- hidden input field storing course id -->
+            <input type="text" value = "{{ course_data['course_id'] }}" style = "display: none;" name = "course_id" form="edit_course_form" id = "course_id">
+    </form>
+</div>
+
+{% endblock %}
+
+{% block script %}
+    var course_id = {{ course_data['course_id']|tojson }};
+
+    function check_all_fields_are_filled() {
+        let course_name_length = document.getElementById("course_name").value.length;
+        let course_completion_date_length = document.getElementById("course_completion_date").value.length;
+        let course_grade_length = document.getElementById("course_grade").value.length;
+        let course_provider_length = document.getElementById("course_provider").value.length;
+        let course_link_length = document.getElementById("course_link").value.length;
+        let course_description_length = document.getElementById("course_description").value.length;
+
+        if (course_name_length== 0 || course_completion_date_length == 0 || course_grade_length == 0 || course_provider_length == 0 || course_link_length == 0 || course_description_length == 0) {
+            alert("Please enter all fields");
+            return false;
+        }
+
+        // Set the course id value
+        document.getElementById("course_id").value = course_id;
+
+        return true;
+    }
+{% endblock %}
+
+

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<html lang = "en">
+    <head>
+        <title>Hello</title>
+
+    </head>
+    <body>
+        <button id = "red">R</button>
+        <button id = "green">G</button>
+        <button id = "blue">B</button>
+    </body>
+
+    <script>
+            let body = document.querySelector("body");
+
+            // # is to denote id
+            // . is for a class
+            document.querySelector("#red").onclick = function () {
+                // This function will run when red button is clicked
+                // This is an anonymous function
+
+                body.style.backgroundColor = "red";
+
+            }
+
+            document.querySelector("#blue").onclick = function () {
+               body.style.backgroundColor = "blue";
+            }
+            document.querySelector("#green").onclick = function () {
+                body.style.backgroundColor = "green";
+            }
+        </script>
+</html>

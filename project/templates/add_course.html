@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+
+{% block title %}
+   Add Course
+{% endblock %}
+
+{% block main %}
+<div class = "container">
+    <form action="/add" method="post" id = "add_course_form" onsubmit = "return check_all_fields_are_filled();" >
+        <p>Please enter the course details.</p>
+        <div class="form-group course_row">
+            <label  class = "label-form ">Course Name</label>
+            <input id = "course_name" size = "30" autocomplete="off" autofocus class="form-control input_course" name="course_name" placeholder="Course Name" type="text">
+        </div>
+        <div class="form-group">
+            <label class = "label-form">Course Completion</label>
+            <input size = "30" type = "date" id="course_completion_date" name="course_completion_date" autocomplete="off" autofocus class="form-control input_course">
+        </div>
+        <div class="form-group">
+            <label class = "label-form">Grade Attained</label>
+            <input id = "course_grade" size = "30" autocomplete="off" autofocus class="form-control input_course" name="course_grade" placeholder="Grade" type="text">
+        </div>
+        <div class="form-group">
+            <label class = "label-form">Course Provider</label>
+            <input id = "course_provider" autocomplete="off" autofocus class="form-control input_course" name="course_provider" placeholder="Course Provider" type="text">
+        </div>
+        <div class="form-group">
+            <label class = "label-form">Course Certificate Link</label>
+            <input id = "course_link" autocomplete="off" autofocus class="form-control" name="course_link" placeholder="Course Certificate HTTP Address" type="url">
+        </div>
+        <div class="form-group formfield">
+            <label class = "label-form">Course Description</label>
+            <textarea id = "course_description" class="form-control textarea_form" rows="4" cols="50" name="course_description" form="add_course_form" autocomplete="off" autofocus  placeholder = "Enter description here..."></textarea>
+        </div>
+        <button class="btn btn-primary" type="submit">Submit Course</button>
+    </form>
+</div>
+{% endblock %}
+
+
+{% block script %}
+    function check_all_fields_are_filled() {
+        let course_name_length = document.getElementById("course_name").value.length;
+        let course_completion_date_length = document.getElementById("course_completion_date").value.length;
+        let course_grade_length = document.getElementById("course_grade").value.length;
+        let course_provider_length = document.getElementById("course_provider").value.length;
+        let course_link_length = document.getElementById("course_link").value.length;
+        let course_description_length = document.getElementById("course_description").value.length;
+
+        if (course_name_length== 0 || course_completion_date_length == 0 || course_grade_length == 0 || course_provider_length == 0 || course_link_length == 0 || course_description_length == 0) {
+            alert("Please enter all fields");
+            return false;
+        }
+
+        return true;
+    }
+{% endblock %}

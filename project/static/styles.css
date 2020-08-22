@@ -1,0 +1,112 @@
+nav .navbar-brand
+{
+    /* size for brand */
+    font-size: xx-large;
+}
+
+/* colors for brand */
+nav .navbar-brand .blue
+{
+    color: #537fbe;
+}
+nav .navbar-brand .red
+{
+    color: #ea433b;
+}
+nav .navbar-brand .yellow
+{
+    color: #f5b82e;
+}
+nav .navbar-brand .green
+{
+    color: #2e944b;
+}
+
+main .form-control
+{
+    /* center form controls */
+    display: inline-block;
+
+    /* override Bootstrap's 100% width for form controls */
+    width: auto;
+}
+
+main
+{
+    /* scroll horizontally as needed */
+    overflow-x: auto;
+
+    /* center contents */
+    text-align: center;
+}
+
+main img
+{
+    /* constrain images on small screens */
+    max-width: 100%;
+}
+
+.label-form {
+  display: inline-block;
+  width: 140px;
+  text-align: left;
+}
+
+.formfield * {
+  vertical-align: middle;
+}
+
+label_course{
+    display: inline-block;
+    float: left;
+    clear: left;
+    width: 250px;
+    text-align: right;
+}
+input_course {
+  display: inline-block;
+  float: left;
+}
+
+.container {
+  width: 850px;
+
+}
+
+.container input  {
+  width: 70%;
+
+}
+
+.container textarea {
+     width: 70%;
+}
+
+@font-face {
+    font-family: 'halo_outlineregular';
+    src: url('halo_outline-webfont.woff2') format('woff2'),
+         url('halo_outline-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'haloregular';
+    src: url('halo-webfont.woff2') format('woff2'),
+         url('halo-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+/* Sample usage of font
+body {
+	font-family: 'haloregular';
+}
+*/
+
+.form-edit {
+    display: inline-block;
+     min-width: 48.8%;
+}

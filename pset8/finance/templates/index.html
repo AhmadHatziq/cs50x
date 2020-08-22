@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    My Portfolio
+{% endblock %}
+
+{% block main %}
+    <table class = "table table-striped">
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th> Name </th>
+                <th> Shares </th>
+                <th> Price </th>
+                <th> TOTAL  </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in stock_rows %}
+                <tr>
+                    <td> {{ row['symbol'] }} </td>
+                    <td> {{ row['name'] }} </td>
+                    <td> {{ row['shares'] }} </td>
+                    <td> {{ row['price'] }} </td>
+                    <td> {{ row['total'] }} </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan = "4"></td>
+                <td> {{ user_cash }}</td>
+            </tr>
+        </tfoot>
+    </table>
+{% endblock %}

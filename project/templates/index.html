@@ -1,0 +1,99 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    My Courses
+{% endblock %}
+
+{% block main %}
+
+<div class="select-semester">
+    <p>Select Semester: </p>
+    <select onchange = "updateTable()" id = "semester_to_display">
+        <option value="select_all" selected>All Semesters</option>
+        {% for single_sem in rows_by_date.keys() %}
+            <option value = "{{ single_sem }}"> {{ single_sem }} </option>
+        {% endfor %}
+    </select>
+</div>
+
+<br>
+
+<table class = "table" id = "display_table">
+        <thead class="thead-dark">
+            <tr>
+                <th> Course Name </th>
+                <th> Grade </th>
+                <th> Provider </th>
+                <th> Verification </th>
+            </tr>
+        </thead>
+
+        <tbody id = "tbody">
+            {% for single_sem in rows_by_date.keys() %}
+                <tr>
+                    <td colspan = "4" style="text-align:left; font-size: 18px;"><b><i>{{ single_sem }}</i></b></td>
+                </tr>
+                {% for course in rows_by_date[single_sem] %}
+                <tr>
+                    <td> {{ course['name'] }} </td>
+                    <td> {{ course['grade'] }} </td>
+                    <td> {{ course['provider'] }} </td>
+                    <td>
+                        <a href="{{ course['link'] }}"> <i class='far fa-file-alt'></i></a>
+                    </td>
+                </tr>
+                {% endfor %}
+
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
+
+{% block script %}
+    var data = {{ rows_by_date|tojson }};
+    var original_table = document.getElementById("tbody").innerHTML;
+
+    function updateTable() {
+        // Retrieve the option selected by the user
+        let selected_option = document.getElementById("semester_to_display").value;
+
+        // Delete all entries in the table except for header
+        let table = document.getElementById("display_table");
+        let numberRowsToDelete = table.rows.length - 1; // Minus 1 to remove header row
+
+        // Delete all rows present
+        for (let i = 0; i < numberRowsToDelete; i++) {
+            table.deleteRow(1);
+        }
+
+        // Update table to show the selected semester
+        if (selected_option == "select_all") {
+
+            document.getElementById("tbody").innerHTML = original_table;
+
+        } else {
+
+            let selected_rows = data[selected_option];
+            for (let i = 0; i < selected_rows.length; i++) {
+                let row = table.insertRow(i + 1);
+                let courseCell = row.insertCell(0);
+                let gradeCell = row.insertCell(1);
+                let providerCell = row.insertCell(2);
+                let verificationCell = row.insertCell(3);
+
+                // Insert data
+                courseCell.innerHTML = selected_rows[i]['name'];
+                gradeCell.innerHTML = selected_rows[i]['grade'];
+                providerCell.innerHTML = selected_rows[i]['provider'];
+                let verification_string = "<a href = " + selected_rows[i]['link'] + "<i class='far fa-file-alt'></i></a>"
+
+                verificationCell.innerHTML = verification_string;
+
+            }
+        }
+
+    }
+
+
+{% endblock %}

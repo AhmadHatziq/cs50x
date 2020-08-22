@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Delete Course
+{% endblock %}
+
+{% block main %}
+
+<p>Select a single course to remove</p>
+
+<br>
+
+<form method = "post" action="/delete" >
+<table class = "table" id = "display_table">
+        <thead class="thead-dark">
+            <tr>
+                <th> Course Name </th>
+                <th> Grade </th>
+                <th> Provider </th>
+                <th> Delete</th>
+            </tr>
+        </thead>
+
+        <tbody id = "tbody">
+            {% for single_sem in rows_by_date.keys() %}
+                <tr>
+                    <td colspan = "4" style="text-align:left; font-size: 18px;"><b><i>{{ single_sem }}</i></b></td>
+                </tr>
+                {% for course in rows_by_date[single_sem] %}
+                <tr>
+                    <td> {{ course['name'] }} </td>
+                    <td> {{ course['grade'] }} </td>
+                    <td> {{ course['provider'] }} </td>
+                    <td> <input type="radio" name="course_chosen" value = "{{ course['name'] }}"> </td>
+                </tr>
+                {% endfor %}
+
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <button class="btn btn-primary" type="submit">Delete course</button>
+</form>
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

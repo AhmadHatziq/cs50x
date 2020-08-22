@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<html lang = "en">
+    <head>
+        <title>Hello</title>
+
+    </head>
+    <body>
+        <p>This is some text.</p>
+        <select>
+            <option value = "large">Large Text</option>
+            <option value = "initial" selected>Medium Text</option>
+            <option value = "small">Small Text</option>
+        </select>
+    </body>
+
+    <script>
+        // When the select element is changed, run this function
+        document.querySelector("select").onchange = function() {
+            // When a function is valled by an event handler, the keyword 'this' refers to the actual triggering event
+
+            // Change the paragraph's font size
+            document.querySelector("p").style.fontSize = this.value;
+        }
+    </script>
+</html>

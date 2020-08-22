@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <title>Calculator</title>
+    </head>
+    <body>
+        <div class="topnav">
+            <a href="index.html">Homepage</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="courses.html">Courses</a>
+            <a class = "active" href="calculator.html">Caclulator</a>
+        </div>
+
+        <div class = "center">
+            <br> <br>
+            <h2> Please enter your calculations below </h2>
+            <br><br>
+            <form>
+                <input type = "text" id = "firstOperand" placeholder = "First Operand">
+                <select id = "operator">
+                    <option value = "add">&#43;</option> <!-- Represents addition -->
+                    <option value = "minus">&#45;</option> <!-- Represents minus -->
+                    <option value = "multiply">&#10005;</option> <!-- Represents multiplication -->
+                    <option value = "divide">&divide;</option> <!-- Represents divide -->
+                    <option value = "remainder">%</option>  <!-- Represents modulo or remainder -->
+                    <option value = "exponent">^</option> <!-- Represents exponent -->
+                </select>
+                <input type = "text" id = "secondOperand" placeholder = "Second Operand">
+                <button type = "button" onclick = "calculate()">Calculate</button>
+            </form>
+
+            <div id = "result">
+
+            </div>
+
+        </div>
+
+        <script>
+            function calculate() {
+                // Retrieve values and strings from DOM
+                let operator = document.getElementById("operator").value;
+                let firstArgument = document.getElementById("firstOperand").value;
+                let secondArgument = document.getElementById("secondOperand").value;
+
+                // Check if an argument has been entered
+                if (operator.length == 0 || firstArgument.length == 0 || secondArgument.length == 0) {
+                    alert("Please input 2 numbers before calculating");
+                    return;
+                }
+
+                // Check if the arguments are valid numbers
+                if (isNaN(firstArgument) || isNaN(secondArgument)) {
+                    alert("Arguments are invalid. Please enter valid numbers.");
+                    return;
+                }
+
+                // Convert arguments to numbers
+                let firstNumber = parseFloat(firstArgument);
+                let secondNumber = parseFloat(secondArgument);
+
+                // Perform calculation
+                let answer = 0;
+
+                switch(operator) {
+                    case "add":
+                        answer = firstNumber + secondNumber;
+                        break;
+
+                    case "minus":
+                        answer = firstNumber - secondNumber;
+                        break;
+
+                    case "divide":
+                        answer = firstNumber / secondNumber;
+                        break;
+
+                    case "multiply":
+                        answer = firstNumber * secondNumber;
+                        break;
+
+                    case "remainder":
+                        answer = firstNumber % secondNumber;
+                        break;
+
+                    case "exponent":
+                        answer = firstNumber ** secondNumber;
+                        break;
+
+                    default:
+                        console.log("Operator switch case in default. Should not be here");
+                        break;
+
+                } // End of swith case
+
+                // Store the answer in the div
+                result = document.getElementById("result");
+                result.innerHTML = "<h2>Answer: " + (answer); + "</h2>";
+
+                return;
+            }
+        </script>
+    </body>
+</html>

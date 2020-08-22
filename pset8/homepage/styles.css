@@ -1,0 +1,65 @@
+.center {
+    text-align: center;
+}
+
+#hidden {
+    display: none;
+}
+
+/* .topnav CSS taken from: https://www.w3schools.com/howto/howto_js_topnav.asp */
+.topnav {
+    overflow: hidden;
+    background-color: #333;
+}
+
+.topnav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.topnav a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.topnav a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+/* .list-without-bullets  taken from: https://www.w3schools.com/css/tryit.asp?filename=trycss_navbar_basic_css */
+.list-without-bullets {
+    margin: 0;
+    list-style-type: none;
+    padding: 0;
+}
+
+/* courses-table taken from https://www.w3schools.com/css/tryit.asp?filename=trycss_table_fancy */
+#courses-table {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#courses-table td, #courses-table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#courses-table tr:nth-child(even){background-color: #f2f2f2;}
+
+#courses-table tr:hover {background-color: #ddd;}
+
+#courses-table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #4CAF50;
+  color: white;
+}
+
+

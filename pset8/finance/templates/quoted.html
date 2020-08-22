@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Quoted Price
+{% endblock %}
+
+{% block main %}
+    <div>
+        <p>Stock name: {{ lookup_values["name"] }}</p>
+        <br>
+        <p>Stock price: {{ lookup_values["price"] }}</p>
+        <br>
+        <p>Stock symbol: {{ lookup_values["symbol"] }}</p>
+    </div>
+{% endblock %}

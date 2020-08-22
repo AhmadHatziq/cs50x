@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <title>Hello there</title>
+    </head>
+    <body>
+        <div class = "center">
+            <h1>My name is </h1>
+            <h1 > Hatziq!</h1>
+            <p>I am a current CS50X student and this is pset8</p>
+            <p> <small>pssst... mouse over these buttons</small></p>
+            <button onmouseover="appear()" type="button" class="btn btn-primary">Appear</button> <br>
+            <button onmouseover="disappear()" type="button" class="btn btn-danger">Disappear</button>
+        </div>
+
+        <div id = "hidden" class = "center">
+            <img src = "https://media-exp1.licdn.com/dms/image/C5103AQF_Xe6O0YoAMA/profile-displayphoto-shrink_400_400/0?e=1603324800&v=beta&t=6GHmLZT2QZUmcfhEwVHzgjiiLstEBKOrGkXv3wO4QhA"
+                id = "linkedin-photo" width="100" height="100" alt = "My LinkedIn Pic"> <br>
+            <ul class = "list-without-bullets">
+              <li><a href="index.html">Homepage</a></li>
+              <li><a href="gallery.html">Gallery</a></li>
+              <li><a href="courses.html">Courses</a></li>
+              <li><a href="calculator.html">Calculator</a></li>
+            </ul>
+        </div>
+
+        <script>
+            function appear() {
+                hidden_element = document.getElementById("hidden");
+                hidden_element.style.display = "block";
+            }
+
+            function disappear() {
+                hidden_element = document.getElementById("hidden");
+                hidden_element.style.display = "none";
+            }
+        </script>
+
+    </body>
+</html>

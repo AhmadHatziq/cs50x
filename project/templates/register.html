@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register here
+{% endblock %}
+
+{% block main %}
+
+    <form action="/register" method="post" onsubmit = "return check_valid_password();">
+        <p>Please enter your username and password to register for an account.</p>
+        <div class="form-group">
+            <label class = "label-form">Username</label>
+            <input autocomplete="off" autofocus class="form-control" name="username" placeholder="Username" type="text">
+        </div>
+        <div class="form-group">
+            <label class = "label-form">Password</label>
+            <input class="form-control" name="password_01" placeholder="Password" type="password" id = "password_01">
+        </div>
+        <div class="form-group">
+            <label class = "label-form">Password confirmation</label>
+            <input class="form-control" name="password_02" placeholder="Password" type="password" id = "password_02">
+        </div>
+        <button class="btn btn-primary" type="submit">Register</button>
+    </form>
+
+{% endblock %}
+
+{% block script %}
+
+    // Checks if both passwords match the complexity requirements.
+    // Checking for same password is done server-side
+    function check_valid_password() {
+        let password_1 = document.getElementById("password_01").value;
+        let password_2 = document.getElementById("password_02").value;
+
+        if (test_str(password_1) && test_str(password_2)) {
+            return true;
+        } else {
+            alert("Passwords do not meet complexity requirements");
+            return false;
+        }
+    }
+
+    function test_str(password_string) {
+            if (password_string.match(/[a-z]/g) && str.match(
+                    /[A-Z]/g) && str.match(
+                    /[0-9]/g) && str.match(
+                    /[^a-zA-Z\d]/g) && str.length >= 8)
+                return true;
+            else
+                return false;
+        }
+
+
+{% endblock %}
+
+

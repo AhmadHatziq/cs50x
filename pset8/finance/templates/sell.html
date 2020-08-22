@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Sell Stocks
+{% endblock %}
+
+{% block main %}
+    <form action="/sell" method="post">
+        <p>Please select the stock and number of stocks to sell.</p>
+        <div class="form-group">
+            <select class = "form-control" name = "symbol" id = "symbol" onchange = "check_valid_option_selected()">
+                <option disabled selected value = "default" name = "default">Symbol</option>
+                    {% for symbol in stock_symbols %}
+                        <option value = "{{ symbol }}" name = "{{ symbol }}">{{ symbol }}</option>
+                    {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <input class="form-control" name="shares" placeholder="Shares" type="number">
+        </div>
+        <button class="btn btn-primary" type="submit" disabled id = 'button'>Sell</button>
+    </form>
+{% endblock %}
+
+{% block script %}
+function check_valid_option_selected() {
+	    select = document.getElementById('symbol');
+
+	    // Only allow button to be activated if the option selected is not the default value
+	    if (select != "default") {
+	        button = document.getElementById('button');
+	        button.disabled = false;
+	    }
+
+	    return;
+    }
+{% endblock %}

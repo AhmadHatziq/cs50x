@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <title>Courses</title>
+    </head>
+
+    <body>
+         <div class="topnav">
+            <a href="index.html">Homepage</a>
+            <a href="gallery.html">Gallery</a>
+            <a class = "active" href="contact">Courses</a>
+            <a href="calculator.html">Caclulator</a>
+        </div>
+
+        <div class = "center">
+            <label for="year">Choose a Semester:</label>
+            <select name = "year" id = "year" onchange = "selectChange()">
+                <option value = "sem1" selected="selected">AY 16/17 Semester 1</option>
+                <option value = "sem2">AY 16/17 Semester 2</option>
+                <option value = "sem3">AY 17/18 Semester 1</option>
+                <option value = "sem4">AY 17/18 Semester 2</option>
+                <option value = "sem5">AY 18/19 Semester 1</option>
+                <option value = "sem6">AY 18/19 Semester 2</option>
+                <option value = "special_sem_1819">AY 18/19 Special Term</option>
+                <option value = "sem7">AY 19/20 Semester 1</option>
+                <option value = "sem8">AY 19/20 Semester 2</option>
+                <option value = "special_sem_1920">AY 19/20 Special Term</option>
+                <option value = "sem9">AY 20/21 Semester 1</option>
+            </select>
+
+            <table id = "courses-table">
+                <tr>
+                    <th>Index</th>
+                    <th>Course Name</th>
+                    <th>Course Provider</th>
+                </tr>
+
+            </table>
+        </div>
+
+        <script>
+            // Initialize vars
+            var table = document.getElementById("courses-table");
+
+            var sem1_course_names = ["CS 1010E - Programming Methodology", "ES 1531 - Critical Thinking and Writing", "MA 1505 - Mathematics I", "PC 1431 - Physics IE", "ST 1131 - Introduction to Statistics"];
+            var sem1_course_providers = ["NUS", "NUS", "NUS", "NUS", "NUS"];
+
+            var sem2_course_names = ["CS 1020E - Data Structures and Algorithms I", "IE 2140 - Engineering Economy", "GEH 1036 - Living with Mathematics", "GER 1000 - Quantitative Reasoning", "MA 1506 - Mathematics II", "ST 2131 - Probability"];
+            var sem2_course_providers = ["NUS", "NUS", "NUS", "NUS", "NUS", "NUS"];
+
+            var sem3_course_names = ["ES 2331 - Communicating Engineering",  "GEQ 1000 - Asking Questions", "GES 1021 - Natural Heritage of Singapore", "IE 2101 - Systems Thinking", "IE 2110 - Operations Research I", "Photoshop CS6"];
+            var sem3_course_providers = ["NUS", "NUS", "NUS", "NUS", "NUS", "Acadia Training"];
+
+            var sem4_course_names = ["CS 2105 - Computer Networks", "CS 2107 - Information Security", "GET 1004 - Cyber Security", "IE 2100 - Probability Models with Applications", "IE 2130 - Quality Engineering I", "IE 2150 - Human Factors Engineering", "Microsoft Visual Basic for Applications"];
+            var sem4_course_providers = ["NUS", "NUS", "NUS", "NUS", "NUS", "NUS", "Acadia Training"];
+
+            var sem5_course_names = ["CS 2010 - Data Structures and Algorithms II", "EG 2401 - Engineering Professionalism", "IE 3101 - Statistics for Engineering Applications", "IE 3110 - Simulation", "IE 3120 - Manufacturing Logistics", "IE 4221 - Transportation Demand Modelling and Economics"]
+            var sem5_course_providers = ["NUS", "NUS", "NUS", "NUS", "NUS", "NUS"];
+
+            var sem6_course_names = ["EG 3611 - Industrial Attachment", "IE 5108 - Facility Layout and Location", "IE 5121 - Quality Planning and Management", "DS101 - Introduction to Python Programming"];
+            var sem6_course_providers = ["NUS", "NUS", "NUS", "Hackwagon Academy"];
+
+            var sem7_course_names = ["CS 2103 - Software Engineering", "CS 3244 - Machine Learning", "ST 2132 - Mathematical Statistics", "ST 3131 - Regression Analysis", "Working with Geospatial Data in Python"];
+            var sem7_course_providers = ["NUS", "NUS", "NUS", "NUS", "DataCamp"];
+
+            var special_sem_1819_course_names = ["ISS 1013 - Project Management", "ISS 1125 - Microprocessor and IOT", "Machine Learning"];
+            var special_sem_1819_course_providers = ["Hanyang University", "Hanyang University", "Stanford University via Coursera"];
+
+            var sem8_course_names = ["IE 3100M - Systems Design Capstone Project", "IE 4102 - Independant Study Module (FYP)", "IE 4210 - Operations Research II", "IE 4211 - Modelling and Analytics", "ST 3246 - Statistical Models for Actuarial Science", "ST 4234 - Bayesian Statistics",
+                                    "OpenVINO Foundational Course", "Time Series Analysis in Python", "ARIMA Models in Python"]
+            var sem8_course_providers = ["NUS", "NUS", "NUS", "NUS", "NUS", "NUS", "Udacity", "DataCamp", "DataCamp"];
+
+            var special_sem_1920_course_names = ["Learning How to Learn", "Big Data Analytics using Spark", "NICF Business Innovation", "Digitalization Passport Programme", "Deep Learning with Pytorch: Zero to GANs", "WILEY Certified Data Analyst"];
+            var special_sem_1920_course_provider = ["UC San Diego and McMaster University via Coursera", "UC San Diego via edX", "NUS", "NUS", "freeCodeCamp", "Gen Infiniti Academy"];
+
+            var sem9_course_names = ["CS 50X - Introduction to Computer Science", "ST 5201 - Statistical Foundations of Data Science", "ST 5210 - Multivariate Data Analysis", "ST 5221 - Probability and Stochastic Processes", "ST 5222 - Advanced Topics in Applied Statistics", "ST 5225 - Statistical Analysis of Networks"]
+            var sem9_course_providers = ["Harvard University via edX", "NUS", "NUS", "NUS", "NUS", "NUS"];
+
+            // Combine all the lists into a final list
+            var all_courses_by_index = [sem1_course_names, sem2_course_names, sem3_course_names, sem4_course_names,
+                                        sem5_course_names, sem6_course_names, sem7_course_names, sem8_course_names,
+                                        sem9_course_names, special_sem_1819_course_names, special_sem_1920_course_names];
+            var all_providers_by_index = [sem1_course_providers, sem2_course_providers, sem3_course_providers, sem4_course_providers,
+                                        sem5_course_providers, sem6_course_providers, sem7_course_providers, sem8_course_providers,
+                                        sem9_course_providers, special_sem_1819_course_providers, special_sem_1920_course_provider];
+
+            // Function to update table whenever there is a change
+            function selectChange() {
+                let semChosen = document.getElementById("year").value; // "year" is the id attribute of the select tag
+                let numberRowsToDelete = table.rows.length - 1; // Minus 1 to remove header row
+
+                // Delete all rows present
+                for (let i = 0; i < numberRowsToDelete; i++) {
+                    table.deleteRow(1);
+                }
+
+                // Update table contents
+                switch(semChosen) {
+                    case "sem1":
+
+                        updateTableWithCourses(0);
+                        break;
+
+                    case "sem2":
+
+                        updateTableWithCourses(1);
+                        break;
+
+                    case "sem3":
+
+                        updateTableWithCourses(2);
+                        break;
+
+                    case "sem4":
+
+                        updateTableWithCourses(3);
+                        break;
+
+                    case "sem5":
+
+                        updateTableWithCourses(4);
+                        break;
+
+                    case "sem6":
+
+                        updateTableWithCourses(5);
+                        break;
+
+                    case "sem7":
+
+                        updateTableWithCourses(6);
+                        break;
+
+                    case "sem8":
+
+                        updateTableWithCourses(7);
+                        break;
+
+                    case "sem9":
+
+                        updateTableWithCourses(8);
+                        break;
+
+                    case "special_sem_1819":
+
+                        updateTableWithCourses(9);
+                        break;
+
+                    case "special_sem_1920":
+
+                        updateTableWithCourses(10);
+                        break;
+                }
+            }
+
+            // Takes in argument the semester indexed from 0 and table element
+            // Assumes all rows are deleted
+            function updateTableWithCourses(arrayIndex) {
+                let course_array = all_courses_by_index[arrayIndex];
+                let provider_array = all_providers_by_index[arrayIndex];
+
+                for (let i = 0; i < course_array.length; i++) {
+                    // Create new row and cells
+                    let row = table.insertRow(i + 1);
+                    let indexCell = row.insertCell(0);
+                    let courseCell = row.insertCell(1);
+                    let providerCell = row.insertCell(2);
+
+                    // Populate cell values
+                    indexCell.innerHTML = i+1;
+                    courseCell.innerHTML = course_array[i];
+                    providerCell.innerHTML = provider_array[i];
+
+                }
+
+            }
+
+            // Set default semester to sem1 contents
+            updateTableWithCourses(0);
+        </script>
+    </body>
+
+</html>
